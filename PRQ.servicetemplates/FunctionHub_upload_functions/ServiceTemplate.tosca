@@ -1,0 +1,366 @@
+tosca_definitions_version: tosca_simple_yaml_1_3
+
+metadata:
+  targetNamespace: "radon.PRQ.blueprints"
+  name: "upload_functions"
+imports:
+  - file: radonnodesaws__AwsLambdaFunction.tosca
+    namespace_uri: http://www.eclipse.org/winery/ns/simple/yaml/1.3/default
+  - file: http://www.eclipse.org/winery/ns/simple/yaml/1.3/default
+    namespace_uri: http://www.eclipse.org/winery/ns/simple/yaml/1.3/default
+  - file: radon.nodes.aws
+    namespace_uri: http://www.eclipse.org/winery/ns/simple/yaml/1.3/default
+  - file: http://www.eclipse.org/winery/ns/simple/yaml/1.3/default
+    namespace_uri: http://www.eclipse.org/winery/ns/simple/yaml/1.3/default
+  - file: radonnodesaws
+    namespace_uri: http://www.eclipse.org/winery/ns/simple/yaml/1.3/default
+  - file: http://www.eclipse.org/winery/ns/simple/yaml/1.3/default
+    namespace_uri: http://www.eclipse.org/winery/ns/simple/yaml/1.3/default
+  - file: radonnodesaws__AwsPlatform.tosca
+    namespace_uri: http://www.eclipse.org/winery/ns/simple/yaml/1.3/default
+  - file: http://www.eclipse.org/winery/ns/simple/yaml/1.3/default
+    namespace_uri: http://www.eclipse.org/winery/ns/simple/yaml/1.3/default
+  - file: radon.nodes.aws
+    namespace_uri: http://www.eclipse.org/winery/ns/simple/yaml/1.3/default
+  - file: http://www.eclipse.org/winery/ns/simple/yaml/1.3/default
+    namespace_uri: http://www.eclipse.org/winery/ns/simple/yaml/1.3/default
+  - file: radonnodesaws
+    namespace_uri: http://www.eclipse.org/winery/ns/simple/yaml/1.3/default
+  - file: http://www.eclipse.org/winery/ns/simple/yaml/1.3/default
+    namespace_uri: http://www.eclipse.org/winery/ns/simple/yaml/1.3/default
+topology_template:
+  node_templates:
+    AwsLambdaFunction_2:
+      type: radon.nodes.aws.AwsLambdaFunction
+      metadata:
+        x: "802"
+        y: "106"
+        displayName: "list-public-repo"
+      properties:
+        handler: "list_repo.get_public_repositories"
+        environment: null
+        memory: 128
+        name: "list-public-repo"
+        memory_range: null
+        alias: "deg"
+        runtime: "python3.7"
+        statement_id: "PRQ_statement_id"
+        concurrency_range: null
+        zip_file: "FunctionHub_lambdas.zip"
+        timeout: 300
+        env_vars: null
+        concurrency: null
+      requirements:
+        - host:
+            node: AwsPlatform
+            relationship: con_HostedOn_1
+            capability: host
+    AwsLambdaFunction_12:
+      type: radon.nodes.aws.AwsLambdaFunction
+      metadata:
+        x: "1096"
+        y: "480"
+        displayName: "user-info"
+      properties:
+        handler: "user_info.get_user_info"
+        environment: null
+        memory: 128
+        name: "user-info"
+        memory_range: null
+        alias: "dev"
+        runtime: "python3.7"
+        statement_id: "PRQ_statement_id"
+        concurrency_range: null
+        zip_file: "FunctionHub_lambdas.zip"
+        timeout: 300
+        env_vars: null
+        concurrency: null
+      requirements:
+        - host:
+            node: AwsPlatform
+            relationship: con_HostedOn_11
+            capability: host
+    AwsLambdaFunction_5:
+      type: radon.nodes.aws.AwsLambdaFunction
+      metadata:
+        x: "285"
+        y: "70"
+        displayName: "create-orginization"
+      properties:
+        handler: "create_org.create_organization"
+        environment: null
+        memory: 128
+        name: "create-orginization"
+        memory_range: null
+        alias: "dev"
+        runtime: "python3.7"
+        statement_id: "PRQ_statement_id"
+        concurrency_range: null
+        zip_file: "FunctionHub_lambdas.zip"
+        timeout: 300
+        env_vars: null
+        concurrency: null
+      requirements:
+        - host:
+            node: AwsPlatform
+            relationship: con_HostedOn_4
+            capability: host
+    AwsLambdaFunction_6:
+      type: radon.nodes.aws.AwsLambdaFunction
+      metadata:
+        x: "269"
+        y: "151"
+        displayName: "list-artifacts"
+      properties:
+        handler: "list_artifact.get_artifacts"
+        environment: null
+        memory: 128
+        name: "list-artifacts"
+        memory_range: null
+        alias: "dev"
+        runtime: "python3.7"
+        statement_id: "PRQ_statement_id"
+        concurrency_range: null
+        zip_file: "FunctionHub_lambdas.zip"
+        timeout: 300
+        env_vars: null
+        concurrency: null
+      requirements:
+        - host:
+            node: AwsPlatform
+            relationship: con_HostedOn_5
+            capability: host
+    AwsLambdaFunction:
+      type: radon.nodes.aws.AwsLambdaFunction
+      metadata:
+        x: "891"
+        y: "73"
+        displayName: "list-repo"
+      properties:
+        handler: "list_repo.get_repositories"
+        environment: null
+        memory: 128
+        memory_range: null
+        name: "list-repo"
+        runtime: "python3.7"
+        alias: "dev"
+        concurrency_range: null
+        statement_id: "PRQ_statement_id"
+        zip_file: "FunctionHub_lambdas.zip"
+        timeout: 300
+        concurrency: null
+        env_vars: null
+      requirements:
+        - host:
+            node: AwsPlatform
+            relationship: con_HostedOn_0
+            capability: host
+    AwsLambdaFunction_3:
+      type: radon.nodes.aws.AwsLambdaFunction
+      metadata:
+        x: "569"
+        y: "70"
+        displayName: "upload-artifact"
+      properties:
+        handler: "upload_artifact.upload_artifact"
+        environment: null
+        memory: 128
+        name: "upload-artifact"
+        memory_range: null
+        alias: "dev"
+        runtime: "python3.7"
+        statement_id: "PRQ_statement_id"
+        concurrency_range: null
+        zip_file: "FunctionHub_lambdas.zip"
+        timeout: 300
+        env_vars: null
+        concurrency: null
+      requirements:
+        - host:
+            node: AwsPlatform
+            relationship: con_HostedOn_2
+            capability: host
+    AwsPlatform:
+      type: radon.nodes.aws.AwsPlatform
+      metadata:
+        x: "1157"
+        y: "227"
+        displayName: "AwsPlatform"
+      properties:
+        name: "myAWS"
+        region: "eu-central-1"
+    AwsLambdaFunction_4:
+      type: radon.nodes.aws.AwsLambdaFunction
+      metadata:
+        x: "544"
+        y: "167"
+        displayName: "create-repositories"
+      properties:
+        handler: "create_repo.create_repository"
+        environment: null
+        memory: 128
+        name: "create-repositories"
+        memory_range: null
+        alias: "dev"
+        runtime: "python3.7"
+        statement_id: "PRQ_statement_id"
+        concurrency_range: null
+        zip_file: "FunctionHub_lambdas.zip"
+        timeout: 300
+        env_vars: null
+        concurrency: null
+      requirements:
+        - host:
+            node: AwsPlatform
+            relationship: con_HostedOn_3
+            capability: host
+    AwsLambdaFunction_9:
+      type: radon.nodes.aws.AwsLambdaFunction
+      metadata:
+        x: "593"
+        y: "483"
+        displayName: "create-user"
+      properties:
+        handler: "create_user.sign_up"
+        environment: null
+        memory: 128
+        name: "create-user"
+        memory_range: null
+        alias: "dev"
+        runtime: "python3.7"
+        statement_id: "PRQ_statement_id"
+        concurrency_range: null
+        zip_file: "FunctionHub_lambdas.zip"
+        timeout: 300
+        env_vars: null
+        concurrency: null
+      requirements:
+        - host:
+            node: AwsPlatform
+            relationship: con_HostedOn_8
+            capability: host
+    AwsLambdaFunction_10:
+      type: radon.nodes.aws.AwsLambdaFunction
+      metadata:
+        x: "582"
+        y: "543"
+        displayName: "login"
+      properties:
+        handler: "user_login.login"
+        environment: null
+        memory: 128
+        name: "login"
+        memory_range: null
+        alias: "dev"
+        runtime: "python3.7"
+        statement_id: "PRQ_statement_id"
+        concurrency_range: null
+        zip_file: "FunctionHub_lambdas.zip"
+        timeout: 300
+        env_vars: null
+        concurrency: null
+      requirements:
+        - host:
+            node: AwsPlatform
+            relationship: con_HostedOn_9
+            capability: host
+    AwsLambdaFunction_7:
+      type: radon.nodes.aws.AwsLambdaFunction
+      metadata:
+        x: "275"
+        y: "332"
+        displayName: "list-versions"
+      properties:
+        handler: "list_version.get_versions"
+        environment: null
+        memory: 128
+        name: "list-versions"
+        memory_range: null
+        alias: "dev"
+        runtime: "python3.7"
+        statement_id: "PRQ_statement_id"
+        concurrency_range: null
+        zip_file: "FunctionHub_lambdas.zip"
+        timeout: 300
+        env_vars: null
+        concurrency: null
+      requirements:
+        - host:
+            node: AwsPlatform
+            relationship: con_HostedOn_6
+            capability: host
+    AwsLambdaFunction_11:
+      type: radon.nodes.aws.AwsLambdaFunction
+      metadata:
+        x: "1111"
+        y: "442"
+        displayName: "logout"
+      properties:
+        handler: "user_logout.logout"
+        environment: null
+        memory: 128
+        name: "logout"
+        memory_range: null
+        alias: "dev"
+        runtime: "python3.7"
+        statement_id: "PRQ_statement_id"
+        concurrency_range: null
+        zip_file: "FunctionHub_lambdas.zip"
+        timeout: 300
+        env_vars: null
+        concurrency: null
+      requirements:
+        - host:
+            node: AwsPlatform
+            relationship: con_HostedOn_10
+            capability: host
+    AwsLambdaFunction_8:
+      type: radon.nodes.aws.AwsLambdaFunction
+      metadata:
+        x: "310"
+        y: "449"
+        displayName: "artifact-details"
+      properties:
+        handler: "artifact_details.get_artifact"
+        environment: null
+        memory: 128
+        name: "artifact-details"
+        memory_range: null
+        alias: "dev"
+        runtime: "python3.7"
+        statement_id: "PRQ_statement_id"
+        concurrency_range: null
+        zip_file: "FunctionHub_lambdas.zip"
+        timeout: 300
+        env_vars: null
+        concurrency: null
+      requirements:
+        - host:
+            node: AwsPlatform
+            relationship: con_HostedOn_7
+            capability: host
+  relationship_templates:
+    con_HostedOn_2:
+      type: tosca.relationships.HostedOn
+    con_HostedOn_3:
+      type: tosca.relationships.HostedOn
+    con_HostedOn_0:
+      type: tosca.relationships.HostedOn
+    con_HostedOn_1:
+      type: tosca.relationships.HostedOn
+    con_HostedOn_11:
+      type: tosca.relationships.HostedOn
+    con_HostedOn_8:
+      type: tosca.relationships.HostedOn
+    con_HostedOn_9:
+      type: tosca.relationships.HostedOn
+    con_HostedOn_6:
+      type: tosca.relationships.HostedOn
+    con_HostedOn_7:
+      type: tosca.relationships.HostedOn
+    con_HostedOn_4:
+      type: tosca.relationships.HostedOn
+    con_HostedOn_10:
+      type: tosca.relationships.HostedOn
+    con_HostedOn_5:
+      type: tosca.relationships.HostedOn
